@@ -1,12 +1,17 @@
 
+
 class thankYou {
 
-    thankYouFeedbackLocator = '#int-thankyou-heading';
+    thankYouFeedbackLocator = '//h1[@id="int-thankyou-heading"]';
 
 
     async thankYouFeedback() {
-
-        return await $(this.thankYouFeedbackLocator).isDisplayed();
+        await browser.pause(2000);
+        const windowHandles = await browser.getWindowHandles();
+        await browser.switchToWindow(windowHandles[1]);
+        const thanksPage = await $(this.thankYouFeedbackLocator);
+        await thanksPage.waitForDisplayed({ timeout: 2000 });
+        return await thanksPage.isDisplayed();
 
     }
 

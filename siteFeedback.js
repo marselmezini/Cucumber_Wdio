@@ -4,7 +4,7 @@ class siteFeedback {
 
 siteFeedbackLocator = '//*[text()="Site Feedback"]';
 
-thankYouFeedBackLocator = '//*[@id="int-thankyou-heading"]';
+
 
 
 

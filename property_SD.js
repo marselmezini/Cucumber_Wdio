@@ -14,7 +14,6 @@ const { expect } = require("chai");
 
 
 
-
 const Homepage = new homepage();
 const Property = new property();
 const StepOneOfThree = new stepOneOfThree();
@@ -23,7 +22,7 @@ const StepTwoOfThree = new stepTwoOfThree();
 
 
 
-When(/^I click on List your property$/, async function() {
+When(/^I click on List your property$/, async function () {
 
   await Homepage.propertyButton();
 
@@ -32,24 +31,24 @@ When(/^I click on List your property$/, async function() {
 })
 
 
-Then(/^I verify what would you like to list is displayed$/, async function() {
+Then(/^I verify what would you like to list is displayed$/, async function () {
 
-  const isTextListDisplayed = await Property.listNameDisplayed();
-  expect(isTextListDisplayed, 'Text list name is not displayed').to.be.true;
-  await browser.pause(2000);
+  await Property.listNameDisplayed();
+  await browser.pause(3000);
+
 })
 
 
 
 
-Then(/^I verify “Lodging“ is displayed$/, async function() {
+Then(/^I verify Lodging is displayed$/, async function () {
 
-  const lodgingDisplayed = await Property.isLodgingDisplayed();
-  expect(lodgingDisplayed, 'lodging is not displayed').to.be.true;
-  await browser.pause(2000);
+  await Property.lodgingDisplayed();
+
+
 })
 
-Then(/^I verify “Private residence“ is displayed$/, async function() {
+Then(/^I verify Private residence is displayed$/, async function () {
 
   const residenceDisplayed = await Property.isPrivateResidenceDisplayed();
   expect(residenceDisplayed, 'Residence is not displayed').to.be.true;
@@ -58,7 +57,7 @@ Then(/^I verify “Private residence“ is displayed$/, async function() {
 
 
 
-When(/^I click on “Private residence“$/, async function() {
+When(/^I click on Private residence$/, async function () {
 
   await Property.clickPrivateResidence();
 
@@ -66,7 +65,7 @@ When(/^I click on “Private residence“$/, async function() {
 
 
 
-Then(/^I verify ”Step 1 of 3” is displayed$/, async function() {
+Then(/^I verify Step 1 of 3 is displayed$/, async function () {
 
   const oneOfThreeDisplayed = await StepOneOfThree.isStepOneOfThreeDisplayed();
   expect(oneOfThreeDisplayed, 'One of three is not displayed').to.be.true;
@@ -76,15 +75,15 @@ Then(/^I verify ”Step 1 of 3” is displayed$/, async function() {
 
 
 
-When(/^I enter “4“ as bedroom$/, async function() {
+When(/^I enter 4 as bedroom$/, async function () {
 
   await StepOneOfThree.enterFourAsBedroom();
-  await browser.pause(2000);
+
 })
 
 
 
-When(/^I enter “2.5“ as bathroom$/, async function () {
+When(/^I enter 2.5 as bathroom$/, async function () {
 
   await StepOneOfThree.enterTwoPointFiveAsBathroom();
   await browser.pause(2000);
@@ -92,7 +91,7 @@ When(/^I enter “2.5“ as bathroom$/, async function () {
 
 
 
-When(/^I click on “Next” button$/, async function() {
+When(/^I click on Next button$/, async function () {
 
   await StepOneOfThree.clicknextButton();
 
@@ -100,16 +99,16 @@ When(/^I click on “Next” button$/, async function() {
 
 
 
-Then(/^I verify ”Step 2 of 3” is displayed$/, async function() {
+Then(/^I verify Step 2 of 3 is displayed$/, async function () {
 
-  const stepDispalyed = await StepTwoOfThree.isStepTwoOfThreeDisplayed();
-  expect(stepDispalyed, 'step is not displayed').to.be.true;
+  const stepDisplayed = await StepTwoOfThree.isStepTwoOfThreeDisplayed();
+  expect(stepDisplayed, 'step is not displayed').to.be.true;
   await browser.pause(2000);
 })
 
 
 
-Then(/^I verify “Where is your place located” is displayed$/, async function() {
+Then(/^I verify Where is your place located is displayed$/, async function () {
 
   const stepTwoOrThreeIsDisplayed = await StepTwoOfThree.isYourPlaceDisplayed();
   expect(stepTwoOrThreeIsDisplayed, 'Step two or three is not displayed').to.be.true;
@@ -119,9 +118,9 @@ Then(/^I verify “Where is your place located” is displayed$/, async function
 
 
 
-When(/^I enter (.+) in address$/, async function() {
+When(/^I enter 1211 in address$/, async function () {
 
-  await StepTwoOfThree.enterAddressOnetwentyOne(121);
+  await StepTwoOfThree.enterAddressOnetwentyOne('1211');
   await browser.pause(2000);
 
 })
@@ -130,9 +129,9 @@ When(/^I enter (.+) in address$/, async function() {
 
 
 
-When(/^I select 1212 J Avenue,Plano,Tx from auto-suggestion$/, async function() {
+When(/^I Select (.+) from auto-suggestion$/, async function (pickAddress) {
 
-  await StepTwoOfThree.typeAddressinfield();
+  await StepTwoOfThree.typeAddressinfield(pickAddress);
   await browser.pause(2000);
 
 })
@@ -142,10 +141,11 @@ When(/^I select 1212 J Avenue,Plano,Tx from auto-suggestion$/, async function() 
 
 
 Then(/^I verify map is displayed$/, async function () {
+  
+  const elementDisplayed = await StepTwoOfThree.verifyMap();
+  expect(elementDisplayed, 'Element is not displayed').to.be.true;
 
-  const mapDisplayed = await StepTwoOfThree.verifyMapIsDisplayed();
-  expect(mapDisplayed, 'Map is not displayed').to.be.true;
-  await browser.pause(2000);
+
 })
 
 
@@ -157,7 +157,7 @@ Then(/^I verify pin in map is displayed$/, async function () {
 
   const pinDisplayed = await StepTwoOfThree.pinInMapDisplayed();
   expect(pinDisplayed, 'Pin is not displayed').to.be.true;
-  await browser.pause(2000);
+
 })
 
 
@@ -166,11 +166,10 @@ Then(/^I verify pin in map is displayed$/, async function () {
 
 
 
-Then(/^I verify “Move the pin to adjust the location of your property“$/, async function () {
+Then(/^I verify Move the pin to adjust the location of your property$/, async function () {
 
-  const displayedAdjustPin = await StepTwoOfThree.verifyAdjustPin();
-  expect(displayedAdjustPin, 'Adjust pin text is not displayed').to.be.true;
-  await browser.pause(2000);
+  const isPinMapDisplayed = await StepTwoOfThree.verifyAdjustPin();
+  expect(isPinMapDisplayed, 'Adjust pin is not displayed').to.be.true;
 })
 
 

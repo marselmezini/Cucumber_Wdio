@@ -1,24 +1,29 @@
+
+
+
+
+
 class stepTwoOfThree {
 
     stepTwoOfThreeLocator = '//*[text()="Step 2 of 3"]';
     placeLocatedLocator = '//*[@class="ulx-location-wrapper__content"]//h1';
     enterAddressLocator = '//*[@aria-label="Enter address..."]';
-    allSuggestionAddressLocator = '//*[@class="typeahead-prediction-list fds-field-select"]';
-    ariaMapLocator = '//*[@aria-label="Map"]';
-    pinLocator= '//*[@style="width: 50px; height: 56px; user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;"]';
-    adjustPinLocator= '//*[@class="map-footer"]';
+    allSuggestionAddressLocators = '//li[@class="typeahead-prediction-item fds-list-item"]';
+    ariaMapLocator = '//div[contains(@style,"z-index: 3")]';
+    pinLocator = '//*[@src="https://maps.gstatic.com/mapfiles/transparent.png"]';
+    adjustPinLocator = '//span[contains(text(),"Move the pin to adjust")]';
 
 
 
 
-     //property functions
+    //property functions
 
 
 
     async isStepTwoOfThreeDisplayed() {
 
         return await $(this.stepTwoOfThreeLocator).isDisplayed();
-        
+
 
 
     }
@@ -31,52 +36,56 @@ class stepTwoOfThree {
 
     async enterAddressOnetwentyOne() {
 
-        return await $(this.enterAddressLocator).setValue(121);
-        
+        return await $(this.enterAddressLocator).setValue(1211);
+
 
 
     }
 
 
-    async typeAddressinfield() {
+    async typeAddressinfield(searchAddress) {
 
-           const allSuggestion = await $$(this.allSuggestionAddressLocator);
+        const allSuggestion = await $$(this.allSuggestionAddressLocators);
 
-        for (const address of allSugesstionAddressLocator) {
+        for (const address of allSuggestion) {
 
-            const addressText = await address.getText('1212 J Avenue, Plano, TX');
+            const addressText = await address.getText();
 
-            if (addressText.startsWith('1212')) {
-              return  await addressText.click();
+            if (addressText.startsWith(searchAddress)) {
+                await address.click();
                 break;
 
             }
 
         }
-        await browser.pause(2000);
+
 
     }
 
-    async verifyMapIsDisplayed() {
+    async verifyMap() {
+        
+        return await $(this.ariaMapLocator).isDisplayed();
 
-    return await $(this.ariaMapLocator).isDisplayed();
-    
+        
 
     }
 
-    async pinInMapDisplayed(){
-    
-       return await $(this.pinLocator).isDisplayed();
-       
+    async pinInMapDisplayed() {
+
+        await $(this.pinLocator).waitForDisplayed();
+        return await $(this.pinLocator).isDisplayed();
+
+
     }
 
-     async verifyAdjustPin(){
-     
-       return await $(this.adjustPinLocator).isDisplayed();
-       
+    async verifyAdjustPin() {
+
+        await $(this.adjustPinLocator).waitForDisplayed();
+        return $(this.adjustPinLocator).isDisplayed();
 
 
-     }
+
+    }
 
 
 

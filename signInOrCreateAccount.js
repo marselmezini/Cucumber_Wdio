@@ -38,9 +38,40 @@ class signInOrCreateAccount {
   }
 
 
+  // Terms and condition 
+
+  privacyLinkLocator = '//a[text()="Privacy Statement"]';
+
+  keyRewardsLocator= '//a[text()="One Key Rewards Terms & Conditions"]';
+
+
+  async clickKeyRewards (){
+      
+      await $(this.keyRewardsLocator).click();
+      
+
+  }
+
+  async  clickPrivacyLink (){
+   
+    const windowHandles = await browser.getWindowHandles();
+    await browser.switchToWindow(windowHandles[0]);
+    await $(this.privacyLinkLocator).waitForClickable({timeout:3000});
+    await $(this.privacyLinkLocator).click();
+    
+
+
+    
+ 
+  }
+
+
+
+
+
 
 }
-module.exports = signInOrCreateAccount;
+  module.exports = signInOrCreateAccount;
 
 
 

@@ -1,15 +1,15 @@
   
 
   
-      Feature: Submit form
+      Feature: SubmitForm
 
             Scenario: Verify error is displayed when user submits the empty feedback form
                Given I am on the hotels homepage
-               When  I click on “Support”
-               And   I click “Site Feedback”
-               And   I click on Submit button
+               When  I click on Support
+               And   I click Site Feedback
+               And   I click on Submit buttons
                Then  I verify error message is displayed 
-               Then  I verify red-box is displayed around OVERALL section
+               Then  I verify red box is displayed around OVERALL section
 
 
 

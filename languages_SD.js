@@ -43,7 +43,7 @@ Then(/^I select Español in language dropdown$/, async function () {
 
 
 
-Then(/^I click on “Save“ button$/, async function () {
+Then(/^I click on Save button$/, async function () {
 
   await LanguagesField.saveButton();
   await browser.pause(2000);
@@ -51,16 +51,16 @@ Then(/^I click on “Save“ button$/, async function () {
 
 
 
-Then(/^I verify “Español” is displayed$/, async function () {
+Then(/^I verify Español is displayed$/, async function () {
 
   const isLanguageGiven = await Homepage.isEspañolDisplayed();
   expect(isLanguageGiven, 'Español is not displayed').to.be.true;
   await browser.pause(2000);
 
 })
-Then(/^I click on “Español“ language$/, async function () {
+Then(/^I click on Español language$/, async function () {
 
-  await Homepage.clickEspañol();
+  await Homepage.clickEspanol();
 
 
 })
@@ -77,18 +77,18 @@ Then(/^I select English$/, async function () {
 
 })
 
-Then(/^I click on “Guardar“ button$/, async function () {
+Then(/^I click on Guardar button$/, async function () {
 
-  await LanguagesField.guardarButton();
+  await LanguagesField.clickGuardarButton();
   await browser.pause(2000);
 
 })
 
 
-Then(/^I verify “English” is displayed$/, async function () {
+Then(/^I verify English is displayed$/, async function () {
 
   const englishDisplayed = await Homepage.isEnglishDisplayed();
-  expect(englishDisplayed, 'english language is not displayed').to.be.true;
+  expect(englishDisplayed, 'English language is not displayed').to.be.true;
   await browser.pause(2000);
 })
 

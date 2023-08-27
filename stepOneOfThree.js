@@ -24,21 +24,27 @@ class stepOneOfThree {
         return await $(this.stepLocator).isDisplayed();
     }
 
+    async getBedroomCount(){
+      return await $(this.bedroomCountLocator).getAttribute('value');
+    }
+
     async enterFourAsBedroom() {
+        
 
-        const expectedCountBedroom = 4;
+     let expectedCountBed = 4;
+        
 
-        await browser.pause(2000);
+        
 
         for (let i = 0; i < 10; i++) {
 
-            const getBedroonCount = await $(this.bedroomCountLocator).getAttribute('value');
+            const BedCount = await this.getBedroomCount();
 
-            if (Number(this.getBedroonCount) < this.expectedCountBedroom) {
-                return await $(this.increaseBtnBedLocator).click();
+            if (Number(BedCount) <Number (expectedCountBed)) {
+                await $(this.increaseBtnBedLocator).click();
             }
-            else if (Number(this.getBedroonCount) > this.expectedCountBedroom) {
-                return await $(this.decreaseBtnBedLocator).click();
+            else if (Number(BedCount) >Number (expectedCountBed)) {
+                 await $(this.decreaseBtnBedLocator).click();
             }
             else {
                 break;
@@ -52,23 +58,27 @@ class stepOneOfThree {
 
     }
 
+    async getBathroomCount (){
+       return await $(this.bathroomCountLocator).getAttribute('value');
+
+    }
+       
 
 
     async enterTwoPointFiveAsBathroom() {
-
-        const expectedCountBathroom = 2.5;
-
         await browser.pause(2000);
+         let expectedCountBathroom = 2.5;
+
 
         for (let i = 0; i < 10; i++) {
 
-            const getBathroomCount = await $(this.bathroomCountLocator).getAttribute('value');
+            const getBathCount = await  this.getBathroomCount();
 
-            if (Number(this.getBathroomCount) < this.expectedCountBathroom) {
-                return await $(this.increaseBtnBathLocator).click();
+            if (Number(getBathCount) < Number(expectedCountBathroom)) {
+                await $(this.increaseBtnBathLocator).click();
             }
-            else if (Number(this.getBathroomCount) > this.expectedCountBathroom) {
-                return await $(this.decreaseBtnBathLocator).click();
+            else if (Number (getBathCount) > Number (expectedCountBathroom)) {
+             await $(this.decreaseBtnBathLocator).click();
             }
             else {
                 break;
@@ -82,16 +92,16 @@ class stepOneOfThree {
     }
 
     async clicknextButton() {
-
+        
         await $(this.nextBtnLocator).click();
 
     }
 
 
 
+
+
 }
-
-
 
 
 

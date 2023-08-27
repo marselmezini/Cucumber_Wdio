@@ -13,7 +13,7 @@ const SignInOrCreateAccount = new signInOrCreateAccount();
 
 Given(/^I am on the hotels homepage$/, async function () {
 
-    await Homepage.launchHotels();
+await Homepage.launchHotels();
 
 })
 

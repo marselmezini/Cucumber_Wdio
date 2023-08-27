@@ -29,10 +29,16 @@ When(/^I click “Site Feedback”$/, async function () {
 
 
 
-When(/^I click on Submit button$/, async function () {
+When(/^I click on Submit buttons$/, async function () {
+    
+    
+   await  Rating.clickSubmitBtn();
+    
 
-    await Rating.clickSubmitBtn();
-    await browser.pause(2000);
+    
+    
+
+    
 
 })
 
@@ -40,14 +46,14 @@ When(/^I click on Submit button$/, async function () {
 
 Then(/^I verify error message is displayed$/, async function () {
 
-    const erroraMessageDisplayed = await Rating.verifyErrorMessage();
+   const erroraMessageDisplayed=  await Rating.verifyErrorMessage();
     expect(erroraMessageDisplayed, 'Error message is not displayed').to.be.true;
     await browser.pause(2000);
 
 })
 
 
-Then(/^I verify red-box is displayed around OVERALL section$/, async function () {
+Then(/^I verify red box is displayed around OVERALL section$/, async function () {
 
     const isRedBoxDisplayed = await Rating.redBoxDisplayed();
     expect(isRedBoxDisplayed,'Red box overall section is not displayed').to.be.true;

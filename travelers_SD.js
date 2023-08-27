@@ -1,13 +1,11 @@
 
-const { When, Then } = require('@wdio/cucumber-framework');
-const travelers = require("../Pages_Folder/travelers");
+const { Then, When } = require('@wdio/cucumber-framework');
 const homepage = require("../Pages_Folder/homepage");
 const { expect } = require('chai');
 
 
 const Homepage = new homepage();
 
-const Travelers = new travelers();
 
 
 
@@ -15,65 +13,66 @@ const Travelers = new travelers();
 When(/^I click on Travelers$/, async function () {
 
 
-    await Homepage.clickSignInLink();
-
-
-})
-
-
-
-
-When(/^I select “Children” as 2$/, async function () {
-
-    await Travelers.countChildrenTwo();
-
-
-
-})
-
-
-
-Then(/^I verify Children-age dropdown are 2$/, async function () {
-
-    const dropdowntwo = await Travelers.areDropdownsTwo();
-    expect(dropdowntwo, 'dropdowns are not two').to.be.equal(2);
+    await Homepage.clickTravelers();
     await browser.pause(2000);
 
+
 })
 
 
 
-When(/^I verify Plus-button is enabled$/, async function () {
 
-    const plusBtnEnabled = await Travelers.isPlusBtnEnabled();
+When(/^I select children as 2$/, async function () {
+
+    await Homepage.countChildrenTwo();
+
+})
+
+
+
+Then(/^I verify children dropdowns are 2$/, async function () {
+    
+    const dropdownDisplayed = await Homepage.areDropdownsTwo();
+    expect(dropdownDisplayed, 'Dropdowns are not 2').to.be.true;
+    await browser.pause(3000);
+
+})
+
+
+
+When(/^I verify plus button is enabled$/, async function () {
+
+    const plusBtnEnabled = await Homepage.isPlusBtnEnabled();
     expect(plusBtnEnabled, 'Plus button is not enabled').to.be.true;
     await browser.pause(2000);
 
 
 
-})
-
-
-
-When(/^I verify minus-button is enabled$/, async function () {
-
-    const minusBtnEnabled = await Travelers.isMinusBtnEnabled();
-
-    expect(minusBtnEnabled, 'Plus button is not enabled').to.be.true;
-
-})
-
-When(/^I select “Children” as 6$/, async function () {
-
-    await Travelers.countChildrenSix();
 
 
 })
 
-Then(/^I verify Children-age dropdown are 6$/, async function () {
 
-    const fieldDropdown = await Travelers.areDropdownsSix();
-    expect(fieldDropdown, 'dropdowns are not six').to.be.equal(6);
+
+When(/^I verify minus button is enabled$/, async function () {
+
+    const minusBtnEnabled = await Homepage.isMinusBtnEnabled();
+
+    expect(minusBtnEnabled, 'Minus button is not enabled').to.be.true;
+    await browser.pause(2000);
+})
+
+When(/^I select children as 6$/, async function () {
+
+    await Homepage.countChildrenSix();
+    await browser.pause(2000);
+
+})
+
+Then(/^I verify children age dropdown are 6$/, async function () {
+
+    const fieldDropdown = await Homepage.areDropdownsSix();
+    expect(fieldDropdown, 'Dropdowns are not six').to.be.true;
     await browser.pause(2000);
 
 })
@@ -81,89 +80,90 @@ Then(/^I verify Children-age dropdown are 6$/, async function () {
 
 
 
-Then(/^I verify Plus button is disabled$/, async function () {
-
-    const plusButtonDisabled = await Travelers.isPlusBtnDisabled();
+Then(/^I verify plus button is disabled$/, async function () {
+    await browser.pause(2000);
+    const plusButtonDisabled = await Homepage.isPlusBtnDisabled();
     expect(plusButtonDisabled, 'Plus button is enabled').to.be.false;
 })
 
 
 
-Then(/^I verify minus-button is enabled$/, async function () {
 
-    const plusBtnEnabled = await Travelers.isMinusBtnEnabled();
+Then(/^I verify minus button is enabled$/, async function () {
+    
+    const plusBtnEnabled = await Homepage.isMinusBtnEnabled();
+    expect(plusBtnEnabled, 'Minus button is not enabled').to.be.true;
+})
+
+
+When(/^I select children as 5$/, async function () {
+  
+    await Homepage.selectChildrenFive();
+
+})
+
+Then(/^I verify children age dropdown are 5$/, async function () {
+   
+    const dropdownsFive = await Homepage.areDropdownsFive();
+    expect(dropdownsFive, 'Dropdowns are not five').to.be.true;
+
+
+
+
+})
+
+
+Then(/^I verify plus button is enabled$/, async function () {
+   
+    const plusBtnEnabled = await Homepage.isPlusBtnEnabled();
     expect(plusBtnEnabled, 'Plus button is not enabled').to.be.true;
-})
-
-
-When(/^I select “Children” as 5$/, async function () {
-
-    await Travelers.selectChildrenFive();
-
-})
-
-Then(/^I verify Children-age dropdown are 5$/, async function () {
-
-    const dropdownsFive = await Travelers.areDropdownsFive();
-    expect(dropdownsFive, 'Dropdowns are not 5').to.be.equal(5);
-    await browser.pause(2000);
-
 
 
 })
 
-
-Then(/^I verify Plus button is enabled$/, async function () {
-
-    const plusBtnEnabled = await Travelers.isPlusBtnEnabled();
-    expect(plusBtnEnabled, 'Plus button is not enabled').to.be.true;
-    await browser.pause(2000);
-
-})
-
-Then(/^I verify minus-button is enabled$/, async function () {
-
-    const minusBtnEnabled = await Travelers.isMinusBtnEnabled();
-    expect(minusBtnEnabled, 'Plus button is  enabled').to.be.true;
-    await browser.pause(2000);
-
-})
-
-
-
-When(/^I select “Children” as 0$/, async function () {
-
-    await Travelers.countChildrenZero();
-
-
-})
-
-
-Then(/^I verify Children-age dropdown is NOT displayed$/, async function () {
-
-    const childFieldDisplayed = await Travelers.isChildrenDropdownDisplayed();
-    expect(childFieldDisplayed, 'child field is displayed').to.be.false;
-    await browser.pause(2000);
+Then(/^I verify minus button is enabled$/, async function () {
+   
+    const minusBttnEnabled = await Homepage.minusBtnEnabled();
+    expect(minusBttnEnabled, 'Plus button is  enabled').to.be.true;
 
 
 })
 
 
 
-Then(/^I verify Plus button is enabled$/, async function () {
+When(/^I select children as 0$/, async function () {
+    
+    await Homepage.countChildrenZero();
 
-    const buttonEnabled = await Travelers.isPlusBtnEnabled();
+
+})
+
+
+Then(/^I verify children age dropdown is NOT displayed$/, async function () {
+    
+    const childFieldDisplayed = await Homepage.isChildrenDropdownDisplayed();
+    expect(childFieldDisplayed, 'Child field is displayed').to.be.false;
+
+
+
+})
+
+
+
+Then(/^I verify plus button is enabled$/, async function () {
+    
+    const buttonEnabled = await Homepage.isPlusBtnEnabled();
     expect(buttonEnabled, 'Plus button is not enable').to.be.true;
-    await browser.pause(2000);
+
 
 })
 
 
-Then(/^I verify minus-button is disabled$/, async function () {
-
-    const minusBtnEnabled = await Travelers.isMinusBtnDisabled();
+Then(/^I verify minus button is disabled$/, async function () {
+   
+    const minusBtnEnabled = await Homepage.isMinusBtnDisabled();
     expect(minusBtnEnabled, 'Minus button is enabled').to.be.false;
-    await browser.pause(2000);
+
 
 
 

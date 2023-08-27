@@ -1,64 +1,83 @@
+
+
 class rating {
 
-    overallLocator = '//*[@id="overall-3"]';
-    contentLocator = '//*[@id="content-4"]';
-    designLocator = 'id="design-4"';
-    easyOfUseLocator = '//*[@id="usability-4"]';
-    submitBtnLocator = '//*[@data-value="  Submit  "]';
-    errorMessageLocator = '#error-text';
-    redBoxDisplayedLocator= 'id="error-1"';
+
+
+
+    errorListLocator='//*[@class="error-list"]';
+    submitBtnLocator = '//input[@class="btn btn-block btn-default submit-btn"]';
+    redBoxDisplayedLocator = '#error-1';
+    overallCheckBoxLocator = '//*[@class="col-xs-9"]//*[@id="overall-3"]';
+    contentCheckLocator = '#content-4';
+    designCheckLocator = '#design-4';
+    easyOfUseCheckLocator = '#usability-3';
+
 
 
     async overallRating() {
 
-        return await $(this.overallLocator).isSelected();
-        
+        const windowHandles = await browser.getWindowHandles();
+        await browser.switchToWindow(windowHandles[1]);
+        const overallCheckBox = await $(this.overallCheckBoxLocator);
+        await overallCheckBox.waitForClickable();
+        await overallCheckBox.click();
+
     }
 
     async contentRating() {
-
-        return await $(this.contentLocator).isSelected();
+        await $(this.contentCheckLocator).waitForClickable();
+        await $(this.contentCheckLocator).click();
 
     }
 
     async designRating() {
-        return await $(this.designLocator).isSelected();
+        await $(this.designCheckLocator).click();
+
     }
 
 
     async easyOfUse() {
 
-        return await $(this.easyOfUseLocator).isSelected()
+        await $(this.easyOfUseCheckLocator).click();
+        await browser.pause(2000);
+
 
     }
 
     async clickSubmitBtn() {
+    const windowHandles = await browser.getWindowHandles();
+    await browser.switchToWindow(windowHandles[1]);
+      const submitButton=  await $(this.submitBtnLocator);
+      await submitButton.waitForClickable();
+      await submitButton.click();
+    }
 
-         await $(this.submitBtnLocator).click();
+    //site feedback
+    
+
+
+    async verifyErrorMessage() {
+
+        const errorMessage = await $(this.errorListLocator);
+        await errorMessage.waitForDisplayed({timeout:2000});
+        return await errorMessage.isDisplayed();
+
+    }
+
+        async redBoxDisplayed() {
+            await $(this.redBoxDisplayedLocator).waitForDisplayed();
+        return  await $(this.redBoxDisplayedLocator).isDisplayed();
         
-
+       
     }
 
-
-    async verifyErrorMessage(){
-
-     return await $(this.errorMessageLocator).isDisplayed();
-     
-
-
-    }
-
-    async redBoxDisplayed (){
-
-        return await $(this.redBoxDisplayedLocator).isDisplayed();
-        
-
-    }
 
 }
 
 
-module.exports = rating;
+
+  module.exports = rating;
 
 
 
